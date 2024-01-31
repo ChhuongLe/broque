@@ -3,7 +3,7 @@ import { initFirebase } from "@/firebase/firebase";
 
 export default function Home() {
   return (
-    <main className="flex bg-[#BEE7B8] w-full h-auto">
+    <main className="flex bg-[#387d7a] w-full h-auto">
       Welcome to Broque lol
     </main>
   );
