@@ -11,32 +11,32 @@ import { useState } from 'react'
 import { connectStorageEmulator } from "firebase/storage";
 
 export default function Header () {
-  initFirebase();
-  const provider = new GoogleAuthProvider();
-  const auth = getAuth();
-  const [user, loading] = useAuthState(auth);
-  const router = useRouter();
+  // initFirebase();
+  // const provider = new GoogleAuthProvider();
+  // const auth = getAuth();
+  // const [user, loading] = useAuthState(auth);
+  // const router = useRouter();
 
-  const [username, setUsername] = useState('')
+  // const [username, setUsername] = useState('')
 
-  const signIn = async () => {
-    const result = await signInWithPopup(auth, provider);
-    console.log(result.user);
-    if(result) {
-      setUsername(result.user.displayName);
-    }
-  }
+  // const signIn = async () => {
+  //   const result = await signInWithPopup(auth, provider);
+  //   console.log(result.user);
+  //   if(result) {
+  //     setUsername(result.user.displayName);
+  //   }
+  // }
 
-  if(loading){
-    return <div>Loading...</div>
-  }
-  if(user) {
-    router.push("/dashboard")
-  }
+  // if(loading){
+  //   return <div>Loading...</div>
+  // }
+  // if(user) {
+  //   router.push("/dashboard")
+  // }
 
 
   return (
-    <div className="bg-[#395e66] w-full">
+    <div className="bg-[#395e66] w-screen">
       <div className="flex text-white mx-auto items-center justify-between max-w-7xl">
         <div className="text-white space-x-5 p-5">
           <span>Mens</span>
