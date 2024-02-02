@@ -6,7 +6,6 @@ import { fetchAllProducts } from '@/helpers/helper';
 
 export default function Categories () {
   const [data, setData] = useState<any[]>([]);
-  let jacketsId = [], shoesId = [], shirtsId = [], accessoriesId = [];
 
   useEffect(()=>{
     fetchAllProducts()
@@ -18,13 +17,8 @@ export default function Categories () {
       })
   },[]);
 
-  // traverse through the data and find each category to sort into each Id category
-  for(const obj of data) {
-    if(obj.category === "Jacket") jacketsId.push(obj.id)
-    if(obj.category === "Shoes") shoesId.push(obj.id)
-    if(obj.category === "Shirts") shirtsId.push(obj.id)
-    if(obj.category === "Accessories") accessoriesId.push(obj.id)
-  }
+  // data should not change
+  const jacketId = data[0], shoesId = data[1], accessoriesId = data[2], shirtsId = data[3];
 
   return (
     <div>
