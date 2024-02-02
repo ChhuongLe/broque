@@ -1,6 +1,31 @@
+'use client'
+
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { fetchAllProducts } from '@/helpers/helper';
 
 export default function Categories () {
+  const [data, setData] = useState<any[]>([]);
+  let jacketsId = [], shoesId = [], shirtsId = [], accessoriesId = [];
+
+  useEffect(()=>{
+    fetchAllProducts()
+      .then(data => {
+        setData(data);
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+  },[]);
+
+  // traverse through the data and find each category to sort into each Id category
+  for(const obj of data) {
+    if(obj.category === "Jacket") jacketsId.push(obj.id)
+    if(obj.category === "Shoes") shoesId.push(obj.id)
+    if(obj.category === "Shirts") shirtsId.push(obj.id)
+    if(obj.category === "Accessories") accessoriesId.push(obj.id)
+  }
+
   return (
     <div>
       <h1 className='text-white text-3xl font-bold pt-10 pb-5 w-screen pl-5'>Shop Categories</h1>
