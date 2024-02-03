@@ -4,11 +4,13 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { fetchAllProducts, fetchThumbnails } from '@/helpers/helper';
 import { set } from 'firebase/database';
+import { setDefaultAutoSelectFamily } from 'net';
 
 export default function Categories () {
   const [data, setData] = useState<any[]>([]);
-  const [promise4All, setPromise4all] = useState<any[]>([])
+  const [promisedData, setPromisedData] = useState<any[]>([])
   let arr: any[] = [];
+  let thumbnailURL: Promise<any>;
   useEffect(()=>{
     fetchAllProducts()
       .then(data => {
@@ -22,18 +24,24 @@ export default function Categories () {
   // data should not change
   const jacketId = data[0], shoesId = data[1], accessoriesId = data[2], shirtsId = data[3] , pantsId = data[4];
 
-  const handleClick = (category: string) => {
-    if(category === "Jackets") jacketId.forEach((element: number) => {
-      arr.push(fetchThumbnails(element))
-      Promise.all(arr)
-      .then((value)=>console.log(value))
-    });
+  const handleClick = async(category: string) => {
+    let selectedArr:number[] = [];
 
-    if(category === "Accessories") accessoriesId.forEach((element: number) => arr.push(fetchThumbnails(element)));
-    if(category === "Pants") pantsId.forEach((element: number) => arr.push(fetchThumbnails(element)));
-    if(category === "Shirts") shirtsId.forEach((element: number) => arr.push(fetchThumbnails(element)));
-    if(category === "Shoes") shoesId.forEach((element: number) => arr.push(fetchThumbnails(element)));
+    if(category === "Jackets") selectedArr = jacketId;
+    if(category === "Accessories") selectedArr = accessoriesId;
+    if(category === "Pants") selectedArr = pantsId;
+    if(category === "Shoes") selectedArr = shoesId;
+    if(category === "Shirts") selectedArr = shirtsId;
+
+    for(let el of selectedArr) {
+      thumbnailURL = await (fetchThumbnails(el))
+        .then(arr.push(thumbnailURL))
+    }
+    console.log(selectedArr)
+    console.log(arr)
   }
+
+
 
   return (
     <div>
