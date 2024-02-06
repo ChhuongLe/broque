@@ -2,15 +2,22 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { fetchAllProducts, fetchThumbnails } from '@/helpers/helper';
-import { set } from 'firebase/database';
-import { setDefaultAutoSelectFamily } from 'net';
+import { fetchAllProducts, fetchThumbnails } from '@/helpers/helper'
+import { useAppStore } from '@/store/store'
+import Link from "next/link"
 
 export default function Categories () {
-  const [data, setData] = useState<any[]>([]);
-  const [promisedData, setPromisedData] = useState<any[]>([])
+  const [data, setData] = useState<any[]>([])
+
+  const [setThumbnails, thumbnails] = useAppStore((state)=>[
+    state.setThumbnails,
+    state.thumbnails,
+  ])
+
   let arr: any[] = [];
   let thumbnailURL: Promise<any>;
+
+  // get all the products first
   useEffect(()=>{
     fetchAllProducts()
       .then(data => {
@@ -24,6 +31,8 @@ export default function Categories () {
   // data should not change
   const jacketId = data[0], shoesId = data[1], accessoriesId = data[2], shirtsId = data[3] , pantsId = data[4];
 
+//-----------------------------------------FUNCTIONS---------------------------------------------------------------------------------
+  // If a user clicks on a category, this function will check which category was selected and get data to send to the category page
   const handleClick = async(category: string) => {
     let selectedArr:number[] = [];
 
@@ -37,17 +46,15 @@ export default function Categories () {
       thumbnailURL = await (fetchThumbnails(el))
         .then(arr.push(thumbnailURL))
     }
-    console.log(selectedArr)
-    console.log(arr)
+    arr.shift();
+    setThumbnails(arr);
   }
-
-
 
   return (
     <div>
       <h1 className='text-white text-3xl font-bold pt-10 pb-5 w-screen pl-5'>Shop Categories</h1>
       <div className='flex flex-row space-x-5 pb-10 items-center justify-around'>
-        <div className='flex relative w-[200px] xl:w-[350px] h-[200px] xl:h-[350px] hover:cursor-pointer hover:grayscale transition duration-300 ease-in-out z-0' onClick={e=>(handleClick(e.target.innerText))}>
+        <Link className='flex relative w-[200px] xl:w-[350px] h-[200px] xl:h-[350px] hover:cursor-pointer hover:grayscale transition duration-300 ease-in-out z-0' onClick={e=>(handleClick(e.target.innerText))} href={"/category"}>
           <div className='flex absolute h-full w-full opacity-0 hover:opacity-70 transition duration-300 ease-in-out z-10 items-center justify-center hover:bg-black'>
             <p className='text-sm lg:text-2xl font-bold text-white opacity-100'>Jackets</p>
           </div>
@@ -57,7 +64,8 @@ export default function Categories () {
             layout='fill'
             objectFit='cover'
           />
-        </div>
+        </Link>
+        {/* Should really refactor this code once things are fleshed out more, very repetitive */}
         <div className='flex relative w-[200px] xl:w-[350px] h-[200px] xl:h-[350px] hover:cursor-pointer hover:grayscale transition duration-300 ease-in-out z-0' onClick={e=>(handleClick(e.target.innerText))}>
           <div className='flex absolute h-full w-full opacity-0 hover:opacity-70 transition duration-300 ease-in-out z-10 items-center justify-center hover:bg-black'>
             <p className='text-sm lg:text-2xl font-bold text-white opacity-100'>Accessories</p>
