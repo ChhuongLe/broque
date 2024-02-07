@@ -1,19 +1,31 @@
+import { MapIcon } from "@heroicons/react/24/solid";
 import { access } from "fs";
 
 export const fetchAllProducts = async () => {
   const res = await fetch("http://3.137.191.193/products/?count=500")
   let products = await res.json();
   // sort here instead of in the Categories component???
-  let jacketsId = [], shoesId = [], accessoriesId = [], shirtsId = [], pantsId = [], allIds = [];
+  let jacketsMap = new Map(), shoesMap = new Map(), accessoriesMap = new Map(), shirtsMap = new Map(), pantsMap = new Map(), allIds = [];
+  const map = new Map();
 
   for(let obj of products) {
-    if(obj.category === "Jacket") jacketsId.push(obj.id)
-    if(obj.category === "Shoes" || obj.category === "Kicks" || obj.category === "Dress Shoes" || obj.category === "Heels") shoesId.push(obj.id)
-    if(obj.category === "Shirt") shirtsId.push(obj.id)
-    if(obj.category === "Accessories" || obj.category === "Sunglasses" || obj.category === "Cap") accessoriesId.push(obj.id)
-    if(obj.category === "Pants") pantsId.push(obj.id)
+    if(obj.category === "Jackets" || obj.category === "Jacket" || obj.category === "Coats" || obj.catergory === "Coat") {
+      jacketsMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+    }
+    if(obj.category === "Shoes" || obj.category === "Kicks" || obj.category === "Dress Shoes" || obj.category === "Heels") {
+      shoesMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+    }
+    if(obj.category === "Shirt") {
+      shirtsMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+    }
+    if(obj.category === "Accessories" || obj.category === "Sunglasses" || obj.category === "Cap") {
+      accessoriesMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+    }
+    if(obj.category === "Pants") {
+      pantsMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+    }
   }
-  allIds = [jacketsId, shoesId, shirtsId, accessoriesId, pantsId]
+  allIds = [jacketsMap, shoesMap, shirtsMap, accessoriesMap, pantsMap]
   return allIds;
 }
 

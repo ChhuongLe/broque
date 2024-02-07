@@ -9,9 +9,11 @@ import Link from "next/link"
 export default function Categories () {
   const [data, setData] = useState<any[]>([])
 
-  const [setThumbnails, thumbnails] = useAppStore((state)=>[
+  const [setThumbnails, thumbnails, category, setCatetory] = useAppStore((state)=>[
     state.setThumbnails,
     state.thumbnails,
+    state.category,
+    state.setCategory
   ])
 
   let arr: any[] = [];
@@ -28,26 +30,29 @@ export default function Categories () {
       })
   },[]);
 
+  console.log
+
   // data should not change
-  const jacketId = data[0], shoesId = data[1], accessoriesId = data[2], shirtsId = data[3] , pantsId = data[4];
+  const jacketsMap = data[0], shoesMap = data[1], accessoriesMap = data[2], shirtsMap = data[3] , pantsMap = data[4];
 
 //-----------------------------------------FUNCTIONS---------------------------------------------------------------------------------
   // If a user clicks on a category, this function will check which category was selected and get data to send to the category page
   const handleClick = async(category: string) => {
-    let selectedArr:number[] = [];
+    let selectedMap;
 
-    if(category === "Jackets") selectedArr = jacketId;
-    if(category === "Accessories") selectedArr = accessoriesId;
-    if(category === "Pants") selectedArr = pantsId;
-    if(category === "Shoes") selectedArr = shoesId;
-    if(category === "Shirts") selectedArr = shirtsId;
+    if(category === "Jackets") selectedMap = jacketsMap;
+    if(category === "Accessories") selectedMap = accessoriesMap;
+    if(category === "Pants") selectedMap = pantsMap;
+    if(category === "Shoes") selectedMap = shoesMap;
+    if(category === "Shirts") selectedMap = shirtsMap;
 
-    for(let el of selectedArr) {
+    for(let el of selectedMap) {
       thumbnailURL = await (fetchThumbnails(el))
         .then(arr.push(thumbnailURL))
     }
     arr.shift();
     setThumbnails(arr);
+    setCatetory(category);
   }
 
   return (

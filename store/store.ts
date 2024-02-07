@@ -6,6 +6,9 @@ interface AppState {
 
  thumbnails: Array<string> | null;
  setThumbnails: (thumbnails: Array<string>) => void[];
+
+ category: string | null;
+ setCategory: (category: string) => void;
 }
 
 export const useAppStore = create<AppState>() ((set) => ({
@@ -14,4 +17,7 @@ export const useAppStore = create<AppState>() ((set) => ({
 
   thumbnails: [],
   setThumbnails: (thumbnails: Array<string>) =>set((state) =>({ thumbnails })),
+
+  category: "",
+  setCategory: (category: string) => set((state) => ({category})),
 }));
