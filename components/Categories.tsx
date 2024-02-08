@@ -5,19 +5,22 @@ import { useEffect, useState } from 'react'
 import { fetchAllProducts, fetchThumbnails } from '@/helpers/helper'
 import { useAppStore } from '@/store/store'
 import Link from "next/link"
+import { UnifrakturCook } from 'next/font/google'
+import { Primitive } from 'firebase/firestore'
 
 export default function Categories () {
   const [data, setData] = useState<any[]>([])
 
-  const [setThumbnails, thumbnails, category, setCatetory] = useAppStore((state)=>[
-    state.setThumbnails,
-    state.thumbnails,
+  const [category, setCatetory, itemMap, setItemMap] = useAppStore((state)=>[
     state.category,
-    state.setCategory
+    state.setCategory,
+    state.itemMap,
+    state.setItemMap,
   ])
 
-  let arr: any[] = [];
   let thumbnailURL: Promise<any>;
+
+  let tempMap: Map<string, Array<string>> = new Map();
 
   // get all the products first
   useEffect(()=>{
@@ -30,30 +33,26 @@ export default function Categories () {
       })
   },[]);
 
-  console.log
-
   // data should not change
   const jacketsMap = data[0], shoesMap = data[1], accessoriesMap = data[2], shirtsMap = data[3] , pantsMap = data[4];
-
+  let selectedMap: Map<number, Array<string>> = new Map();
 //-----------------------------------------FUNCTIONS---------------------------------------------------------------------------------
   // If a user clicks on a category, this function will check which category was selected and get data to send to the category page
   const handleClick = async(category: string) => {
-    let selectedMap;
 
-    if(category === "Jackets") selectedMap = jacketsMap;
+    if(category === "Jackets") {
+      selectedMap = jacketsMap;
+      console.log(jacketsMap)
+    }
     if(category === "Accessories") selectedMap = accessoriesMap;
     if(category === "Pants") selectedMap = pantsMap;
     if(category === "Shoes") selectedMap = shoesMap;
     if(category === "Shirts") selectedMap = shirtsMap;
 
-    for(let el of selectedMap) {
-      thumbnailURL = await (fetchThumbnails(el))
-        .then(arr.push(thumbnailURL))
-    }
-    arr.shift();
-    setThumbnails(arr);
+    setItemMap(selectedMap);
     setCatetory(category);
   }
+
 
   return (
     <div>

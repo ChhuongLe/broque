@@ -1,3 +1,4 @@
+import { LargeNumberLike } from "crypto";
 import { create } from "zustand";
 
 interface AppState {
@@ -9,6 +10,9 @@ interface AppState {
 
  category: string | null;
  setCategory: (category: string) => void;
+
+ itemMap: Map<number, Array<string>> | null;
+ setItemMap: (itemMap: Map<number, Array<string>>) => void[];
 }
 
 export const useAppStore = create<AppState>() ((set) => ({
@@ -20,4 +24,7 @@ export const useAppStore = create<AppState>() ((set) => ({
 
   category: "",
   setCategory: (category: string) => set((state) => ({category})),
+
+  itemMap: new Map(),
+  setItemMap: (itemMap: Map<number, Array<string>>) => set((state)=> ({itemMap}))
 }));

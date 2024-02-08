@@ -6,11 +6,11 @@ export const fetchAllProducts = async () => {
   let products = await res.json();
   // sort here instead of in the Categories component???
   let jacketsMap = new Map(), shoesMap = new Map(), accessoriesMap = new Map(), shirtsMap = new Map(), pantsMap = new Map(), allIds = [];
-  const map = new Map();
-
+  let url = "";
   for(let obj of products) {
     if(obj.category === "Jackets" || obj.category === "Jacket" || obj.category === "Coats" || obj.catergory === "Coat") {
-      jacketsMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+      url = await(fetchThumbnails(obj.id))
+      jacketsMap.set(obj.id, [obj.default_price, obj.name, obj.description, url])
     }
     if(obj.category === "Shoes" || obj.category === "Kicks" || obj.category === "Dress Shoes" || obj.category === "Heels") {
       shoesMap.set(obj.id, [obj.default_price, obj.name, obj.description])

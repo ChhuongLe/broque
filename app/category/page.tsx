@@ -4,10 +4,16 @@ import { useAppStore } from '@/store/store';
 import Image from 'next/image'
 
 export default function Category () {
-  const [thumbnails, category] = useAppStore((state)=>[
-    state.thumbnails,
-    state.category
+  const [category, itemMap] = useAppStore((state)=>[
+    state.category,
+    state.itemMap,
   ])
+
+  // initialize variables to use
+  let idNum: Array<number> = [];
+  let thumbnails: Array<string> = [], itemName: Array<string> = [], itemDesc: Array<string>= [], price: Array<number> = [];
+
+  
 
   let motto = ""
 
