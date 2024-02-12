@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react'
 import { fetchAllProducts, fetchThumbnails } from '@/helpers/helper'
 import { useAppStore } from '@/store/store'
 import Link from "next/link"
-import { UnifrakturCook } from 'next/font/google'
-import { Primitive } from 'firebase/firestore'
 
 export default function Categories () {
   const [data, setData] = useState<any[]>([])
@@ -32,20 +30,13 @@ export default function Categories () {
         console.log(error);
       })
   },[]);
-
-
   // data should not change
   const jacketsMap = data[0], shoesMap = data[1], accessoriesMap = data[2], shirtsMap = data[3] , pantsMap = data[4];
   let selectedMap: Array<any> = [];
 //-----------------------------------------FUNCTIONS---------------------------------------------------------------------------------
   // If a user clicks on a category, this function will check which category was selected and get data to send to the category page
   const handleClick = async(category: string) => {
-
-    if(category === "Jackets") {
-      selectedMap = jacketsMap;
-      console.log("jacketsMap", jacketsMap)
-      console.log("selectedMap: ", selectedMap)
-    }
+    if(category === "Jackets") selectedMap = jacketsMap;
     if(category === "Accessories") selectedMap = accessoriesMap;
     if(category === "Pants") selectedMap = pantsMap;
     if(category === "Shoes") selectedMap = shoesMap;
@@ -54,7 +45,6 @@ export default function Categories () {
     setItemMap(selectedMap);
     setCatetory(category);
   }
-
 
   return (
     <div>

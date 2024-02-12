@@ -10,8 +10,8 @@ interface AppState {
  category: string | null;
  setCategory: (category: string) => void;
 
- itemMap: {"id": number, "price": number, "name": string, "string": string, "img": string}[] | null;
- setItemMap: (itemMap:{"id": number, "price": number, "name": string, "string": string, "img": string}[]) => void[];
+ itemMap: Array<any> | null;
+ setItemMap: (itemMap: Array<any>) => void[];
 }
 
 export const useAppStore = create<AppState>() ((set) => ({
@@ -25,5 +25,5 @@ export const useAppStore = create<AppState>() ((set) => ({
   setCategory: (category: string) => set((state) => ({category})),
 
   itemMap: [],
-  setItemMap: (itemMap:{"id": number, "price": number, "name": string, "string": string, "img": string}[]) => set((state)=> ({itemMap}))
+  setItemMap: (itemMap: Array<any>) => set((state)=> ({itemMap}))
 }));

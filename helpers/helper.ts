@@ -1,6 +1,3 @@
-import { MapIcon } from "@heroicons/react/24/solid";
-import { access } from "fs";
-
 export const fetchAllProducts = async () => {
   const res = await fetch("http://3.137.191.193/products/?count=500")
   let products = await res.json();
@@ -14,7 +11,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
-        "description:": obj.description,
+        "description": obj.description,
         "img": url,
       })
     }
@@ -24,7 +21,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
-        "description:": obj.description,
+        "description": obj.description,
         "img": url,
       })
     }
@@ -34,7 +31,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
-        "description:": obj.description,
+        "description": obj.description,
         "img": url,
       })
     }
@@ -44,7 +41,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
-        "description:": obj.description,
+        "description": obj.description,
         "img": url,
       })
     }
@@ -54,11 +51,12 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
-        "description:": obj.description,
+        "description": obj.description,
         "img": url,
       })
     }
   }
+  console.log("fetch successful!")
   allIds = [jacketsMap, shoesMap, shirtsMap, accessoriesMap, pantsMap]
   return allIds;
 }
