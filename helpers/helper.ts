@@ -5,24 +5,58 @@ export const fetchAllProducts = async () => {
   const res = await fetch("http://3.137.191.193/products/?count=500")
   let products = await res.json();
   // sort here instead of in the Categories component???
-  let jacketsMap = new Map(), shoesMap = new Map(), accessoriesMap = new Map(), shirtsMap = new Map(), pantsMap = new Map(), allIds = [];
+  let jacketsMap = [], shoesMap = [], accessoriesMap = [], shirtsMap = [], pantsMap = [], allIds = [];
   let url = "";
   for(let obj of products) {
     if(obj.category === "Jackets" || obj.category === "Jacket" || obj.category === "Coats" || obj.catergory === "Coat") {
       url = await(fetchThumbnails(obj.id))
-      jacketsMap.set(obj.id, [obj.default_price, obj.name, obj.description, url])
+      jacketsMap.push({
+        "id": obj.id,
+        "price": obj.default_price,
+        "name": obj.name,
+        "description:": obj.description,
+        "img": url,
+      })
     }
     if(obj.category === "Shoes" || obj.category === "Kicks" || obj.category === "Dress Shoes" || obj.category === "Heels") {
-      shoesMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+      url = await(fetchThumbnails(obj.id))
+      shoesMap.push({
+        "id": obj.id,
+        "price": obj.default_price,
+        "name": obj.name,
+        "description:": obj.description,
+        "img": url,
+      })
     }
     if(obj.category === "Shirt") {
-      shirtsMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+      url = await(fetchThumbnails(obj.id))
+      shirtsMap.push({
+        "id": obj.id,
+        "price": obj.default_price,
+        "name": obj.name,
+        "description:": obj.description,
+        "img": url,
+      })
     }
     if(obj.category === "Accessories" || obj.category === "Sunglasses" || obj.category === "Cap") {
-      accessoriesMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+      url = await(fetchThumbnails(obj.id))
+      accessoriesMap.push({
+        "id": obj.id,
+        "price": obj.default_price,
+        "name": obj.name,
+        "description:": obj.description,
+        "img": url,
+      })
     }
     if(obj.category === "Pants") {
-      pantsMap.set(obj.id, [obj.default_price, obj.name, obj.description])
+      url = await(fetchThumbnails(obj.id))
+      pantsMap.push({
+        "id": obj.id,
+        "price": obj.default_price,
+        "name": obj.name,
+        "description:": obj.description,
+        "img": url,
+      })
     }
   }
   allIds = [jacketsMap, shoesMap, shirtsMap, accessoriesMap, pantsMap]
