@@ -25,7 +25,7 @@ export default function Category () {
         <div className='grid grid-cols-2 py-10 mr-[-100px] gap-x-32'>
           {itemMap!.map((el)=>{
             return (
-              <ItemCard id={el.id} price={el.price} name={el.name} description={el.description} img={el.img} />
+              <ItemCard id={el.id} price={el.price} name={el.name} description={el.description} slogan={el.slogan} img={el.img} />
             )
           })}
         </div>

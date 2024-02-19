@@ -12,6 +12,9 @@ interface AppState {
 
  itemMap: Array<any> | null;
  setItemMap: (itemMap: Array<any>) => void[];
+
+ item: any | null;
+ setItem: (item: any) => void;
 }
 
 export const useAppStore = create<AppState>() ((set) => ({
@@ -25,5 +28,8 @@ export const useAppStore = create<AppState>() ((set) => ({
   setCategory: (category: string) => set((state) => ({category})),
 
   itemMap: [],
-  setItemMap: (itemMap: Array<any>) => set((state)=> ({itemMap}))
+  setItemMap: (itemMap: Array<any>) => set((state)=> ({itemMap})),
+
+  item: {},
+  setItem: (item: {}) => set((state) => ({item})),
 }));

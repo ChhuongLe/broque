@@ -30,13 +30,17 @@ export default function Categories () {
         console.log(error);
       })
   },[]);
+
+  const handleSelection = () => {
+
+  }
   // data should not change
   const jacketsMap = data[0], shoesMap = data[1], accessoriesMap = data[2], shirtsMap = data[3] , pantsMap = data[4];
   let selectedMap: Array<any> = [];
 //-----------------------------------------FUNCTIONS---------------------------------------------------------------------------------
   // If a user clicks on a category, this function will check which category was selected and get data to send to the category page
   const handleClick = async(category: string) => {
-    if(category === "Jackets") selectedMap = jacketsMap;
+    if(category === "Jackets") {selectedMap = jacketsMap;}
     if(category === "Accessories") selectedMap = accessoriesMap;
     if(category === "Pants") selectedMap = pantsMap;
     if(category === "Shoes") selectedMap = shoesMap;

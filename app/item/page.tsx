@@ -1,0 +1,51 @@
+'use client'
+
+import { getStyles } from '@/helpers/helper'
+import { useAppStore } from '@/store/store'
+import Image from 'next/image'
+import { useEffect } from 'react'
+import { useState } from 'react'
+
+export default function Item () {
+  const [item] = useAppStore((state)=> [
+    state.item,
+  ]);
+
+  const [styles, setStyles] = useState([]);
+
+  useEffect(()=>{
+    getStyles(item.id)
+      .then(data => {
+        setStyles(data.results);
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }, [])
+
+  let currStyle ="";
+  let skus = {};
+
+  if(styles[0]) {
+    currStyle = styles[0].name;
+    skus = styles[0].skus;
+  }
+
+  console.log(skus)
+
+  return (
+    <div>
+      <div className='flex flex-row'>
+        <div className='flex relative w-[500px] h-[600px]'>
+          <Image src={item.img} alt="" objectFit='cover' layout='fill'/>
+        </div>
+        <div className='flex flex-col'>
+          <span>{item.name}</span>
+          <span>{item.price}</span>
+          <span>{item.slogan}</span>
+          <span>Style: {currStyle}</span>
+        </div>
+      </div>
+    </div>
+  )
+}

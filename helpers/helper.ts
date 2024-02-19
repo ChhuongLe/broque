@@ -11,6 +11,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
+        "slogan": obj.slogan,
         "description": obj.description,
         "img": url,
       })
@@ -21,6 +22,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
+        "slogan": obj.slogan,
         "description": obj.description,
         "img": url,
       })
@@ -31,6 +33,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
+        "slogan": obj.slogan,
         "description": obj.description,
         "img": url,
       })
@@ -41,6 +44,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
+        "slogan": obj.slogan,
         "description": obj.description,
         "img": url,
       })
@@ -51,6 +55,7 @@ export const fetchAllProducts = async () => {
         "id": obj.id,
         "price": obj.default_price,
         "name": obj.name,
+        "slogan": obj.slogan,
         "description": obj.description,
         "img": url,
       })
@@ -64,6 +69,12 @@ export const fetchAllProducts = async () => {
 export const fetchThumbnails = async (id: number) => {
   const res = await(fetch(`http://3.137.191.193/products/${id}/styles`))
   let styles = await res.json();
-  let thumbnail_url = await styles.results[0].photos[0].thumbnail_url;
+  let thumbnail_url = await styles.results[0].photos[0].url;
   return thumbnail_url;
+}
+
+export const getStyles = async (id: number) => {
+  const res = await(fetch(`http://3.137.191.193/products/${id}/styles`))
+  let styles = await res.json();
+  return styles;
 }
