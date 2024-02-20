@@ -5,6 +5,7 @@ import { useAppStore } from '@/store/store'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import Sizes from './Sizes'
 
 export default function Item () {
   const [item] = useAppStore((state)=> [
@@ -23,15 +24,13 @@ export default function Item () {
       });
   }, [])
 
-  let currStyle ="";
-  let skus = {};
+  let currStyle:string = "";
+  let skus:any = {};
 
   if(styles[0]) {
     currStyle = styles[0].name;
     skus = styles[0].skus;
   }
-
-  console.log(skus)
 
   return (
     <div>
@@ -44,6 +43,7 @@ export default function Item () {
           <span>{item.price}</span>
           <span>{item.slogan}</span>
           <span>Style: {currStyle}</span>
+          <Sizes skus={skus}/>
         </div>
       </div>
     </div>
