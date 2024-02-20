@@ -66,6 +66,38 @@ export const fetchAllProducts = async () => {
   return allIds;
 }
 
+export const fetchCategory = async (category: string) => {
+  const categoryDictionary = {
+    Jackets: ["Jackets", "Jacket", "Coats", "Coat"],
+    Pants: ["Pants", "Shorts" ],
+    Shoes: ["Kicks", "Shoes", "Pumps", "Dress Shoes", "Heels"],
+    Accessories: ["Accessories", "Earrings", "Watches", "Watch", "Earring", "Sunglass", "Cap"],
+    Shirts: ["Shirts", "Shirt"]
+  }
+
+  let result = [], url = "";
+
+  const res = await(fetch("http://3.137.191.193/products/?count=500"));
+  const products = await res.json();
+
+  if(categoryDictionary[category]) {
+    for(const obj of products) {
+      if(categoryDictionary[category].includes(obj.category)) {
+        url = await(fetchThumbnails(obj.id))
+        result.push({
+          "id": obj.id,
+          "price": obj.default_price,
+          "name": obj.name,
+          "slogan": obj.slogan,
+          "description": obj.description,
+          "img": url,
+        })
+      }
+    }
+  }
+  return result;
+}
+
 export const fetchThumbnails = async (id: number) => {
   const res = await(fetch(`http://3.137.191.193/products/${id}/styles`))
   let styles = await res.json();
