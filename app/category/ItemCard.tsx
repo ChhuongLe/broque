@@ -20,7 +20,7 @@ export default function ItemCard({id, price, name, slogan, description, img}) {
     setItem(newItem);
   }
   return (
-    <div className="flex flex-col w-[300px] h-[300px] lg:w-[600px] lg:h-[600px]">
+    <div className="flex flex-col relative w-[300px] h-[300px] lg:w-[600px] lg:h-[600px]">
       <div className="flex relative w-[200px] h-[200px] lg:w-[500px] lg:h-[500px]">
         <Link href="/item"><Image src={img} alt="" objectFit="cover" layout="fill" onClick={handleClick} /><br /></Link>
       </div>

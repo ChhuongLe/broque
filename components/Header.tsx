@@ -3,6 +3,8 @@
 import { ShoppingCartIcon, UserCircleIcon } from "@heroicons/react/24/solid"
 import Image from 'next/image'
 import Link from 'next/link'
+import { useAppStore } from '@/store/store'
+
 import { initFirebase } from "@/firebase/firebase"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -11,6 +13,10 @@ import { useState } from 'react'
 import { connectStorageEmulator } from "firebase/storage";
 
 export default function Header () {
+  const [setItemMap] = useAppStore((state)=> [
+    state.setItemMap,
+  ])
+
   // initFirebase();
   // const provider = new GoogleAuthProvider();
   // const auth = getAuth();
@@ -34,6 +40,9 @@ export default function Header () {
   //   router.push("/dashboard")
   // }
 
+  const handleClick = () => {
+    setItemMap([])
+  }
 
   return (
     <div className="bg-[#395e66] w-screen">
@@ -42,7 +51,7 @@ export default function Header () {
           <span>Mens</span>
           <span>Womens</span>
         </div>
-        <div><Link href='/'><Image src="https://i.imgur.com/847i1mE.png" alt="" width={100} height={150} /></Link></div>
+        <div><Link href='/'><Image src="https://i.imgur.com/847i1mE.png" alt="" width={100} height={150} onClick={handleClick}/></Link></div>
         <div className="flex space-x-5 p-5 text-white">
           <span className="cursor-pointer h-6 w-6"><UserCircleIcon /></span>
           <ShoppingCartIcon className="h-6 w-6"/>
