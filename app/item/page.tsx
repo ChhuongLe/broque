@@ -40,15 +40,16 @@ export default function Item () {
   }
 
   return (
-    <div>
-      <div className='flex flex-row'>
+    <div className='py-[50px] w-screen'>
+      <div className='flex flex-row justify-around max-w-7xl mr-auto'>
         <div className='flex relative w-[500px] h-[600px]'>
-          <div className='grid grid-row-6 overflow-hidden'>
+          <div className='grid grid-row-6 space-y-3 overflow-y-scroll no-scrollbar'>
             {
               varianceArr.map((el)=>{
-                console.log(el)
                 return(
-                  <Image src={el} alt="" width={100} height={10}/>
+                  <div className='flex relative w-[100px] h-[100px]'>
+                    <Image src={el} alt="" layout='fill' objectFit='cover'/>
+                  </div>
                 )
               })
             }
@@ -58,10 +59,10 @@ export default function Item () {
           </div>
         </div>
         <div className='flex flex-col'>
-          <span>{item.name}</span>
-          <span>{item.price}</span>
-          <span>{item.slogan}</span>
-          <span>Style: {currStyle}</span>
+          <span className='text-lg font-bold'>{item.name}</span>
+          <span className='text-sm'>${item.price}</span>
+          <span className='text-sm'>{item.slogan}</span>
+          <span className='text-sm'>Style: {currStyle}</span>
           <Sizes skus={skus}/>
         </div>
       </div>
