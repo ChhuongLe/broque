@@ -99,7 +99,7 @@ No examples yet, To Be Edited later
 
 Chhuong Le: chhuongcle@gmail.com
 
-Project Link: [https://github.com/ChhuongLe/TrelloClone](https://github.com/ChhuongLe/TrelloClone)
+Project Link: [https://github.com/ChhuongLe/broque](https://github.com/ChhuongLe/broque)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
