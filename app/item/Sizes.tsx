@@ -1,10 +1,16 @@
 export default function Sizes ({ skus }) {
-  console.log(skus)
+
   return (
     <div>
-      <button>
-
-      </button>
+      {
+        Object.keys(skus).map(function(keyName, keyIndex){
+          return(
+            <div>
+              <span>{skus[keyName].size}</span>
+            </div>
+          )
+        })
+      }
     </div>
   )
 }

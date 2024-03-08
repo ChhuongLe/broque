@@ -59,10 +59,10 @@ export default function Item () {
           </div>
         </div>
         <div className='flex flex-col'>
-          <span className='text-lg font-bold'>{item.name}</span>
-          <span className='text-sm'>${item.price}</span>
-          <span className='text-sm'>{item.slogan}</span>
-          <span className='text-sm'>Style: {currStyle}</span>
+          <span className='text-lg font-bold lg:text-3xl'>{item.name}</span>
+          <span className='text-sm lg:text-lg'>${item.price}</span>
+          <span className='text-sm lg:text-lg'>{item.slogan}</span>
+          <span className='text-sm lg:text-lg'>Style: {currStyle}</span>
           <Sizes skus={skus}/>
         </div>
       </div>
