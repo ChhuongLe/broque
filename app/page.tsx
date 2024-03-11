@@ -9,7 +9,6 @@ export default function Home() {
     <main className="flex flex-col bg-[#387d7a] w-screen h-screen">
         <Banner />
         <Categories />
-        <Footer />
     </main>
   );
 }

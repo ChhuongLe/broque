@@ -13,7 +13,7 @@ export default function Item () {
   ]);
 
   const [styles, setStyles] = useState([]);
-  const [currImage, setCurrImage] = useState("");
+  const [currImage, setCurrImage] = useState(item.img);
 
   let varianceArr = [];
 
@@ -39,23 +39,27 @@ export default function Item () {
     }
   }
 
+  const handleClick = (e) => {
+    setCurrImage(varianceArr[e.target.id]);
+  }
+
   return (
     <div className='py-[50px] w-screen'>
       <div className='flex flex-row justify-around max-w-7xl mr-auto'>
         <div className='flex relative w-[500px] h-[600px]'>
           <div className='grid grid-row-6 space-y-3 overflow-y-scroll no-scrollbar'>
             {
-              varianceArr.map((el)=>{
+              varianceArr.map((el,idx)=>{
                 return(
                   <div className='flex relative w-[100px] h-[100px]'>
-                    <Image src={el} alt="" layout='fill' objectFit='cover'/>
+                    <div key={idx} className='cursor-pointer' onClick={((e) => {handleClick(e)})}><Image id={idx} src={el} alt="" layout='fill' objectFit='cover'/></div>
                   </div>
                 )
               })
             }
           </div>
-          <div className='flex relative w-[400px] h-[600px]'>
-            <Image src={item.img} alt="" objectFit='cover' layout='fill'/>
+          <div className='flex relative w-[400px] h-[600px]' onClick={handleClick}>
+            <Image src={currImage} alt="" objectFit='cover' layout='fill'/>
           </div>
         </div>
         <div className='flex flex-col'>
