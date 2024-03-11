@@ -1,15 +1,31 @@
 export default function Footer() {
   return (
-    <div className="bg-[#395e66] grid grid-cols-3 max-w-7xl">
-      <div>
-        <h2 className="text-2xl font-bold">Explore</h2>
+    <footer className="bottom-0">
+      <div className="flex flex-row bg-[#395e66] justify-around items-center">
+        <div>
+          <h2 className="flex flex-col text-xl lg:text-2xl font-bold">Explore</h2>
+          <p>About</p>
+          <p>Careers</p>
+          <p>Affiliates</p>
+        </div>
+        <div>
+          <h2 className="flex flex-col text-xl lg:text-2xl font-bold">Services</h2>
+          <p>Delivery</p>
+          <p>Support</p>
+          <p>FAQ</p>
+        </div>
+        <div>
+          <h2 className="flex flex-col text-xl lg:text-2xl font-bold">House Of Broque</h2>
+          <p>Broque Fan Club</p>
+          <p>Broque Blog</p>
+          <p>The life of a Broquer</p>
+        </div>
       </div>
-      <div>
-        <h2 className="text-2xl font-bold">Services</h2>
+      <div className="flex flex-col items-center">
+        <p>Privacy Policy</p>
+        <p>Terms and conditions</p>
+        <p>© 2024 Broque Americans For More Money Please</p>
       </div>
-      <div>
-        <h2 className="text-2xl font-bold">House Of Broque</h2>
-      </div>
-    </div>
+    </footer>
   )
 }
