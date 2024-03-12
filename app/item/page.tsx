@@ -14,8 +14,10 @@ export default function Item () {
 
   const [styles, setStyles] = useState([]);
   const [currImage, setCurrImage] = useState(item.img);
+  const [currStyle, setCurrStyle] = useState("");
 
-  let varianceArr = [];
+  let stylesArr:any = [];
+  let selectedStyle = "";
 
   useEffect(()=>{
     getStyles(item.id)
@@ -27,20 +29,20 @@ export default function Item () {
       });
   }, [])
 
-  let currStyle:string = "";
   let skus:any = {};
 
   if(styles[0]) {
-    currStyle = styles[0].name;
     skus = styles[0].skus;
+    selectedStyle = styles[0].name;
 
     for(let i = 0; i < styles.length; i++) {
-      varianceArr.push(styles[i].photos[0].thumbnail_url);
+      stylesArr.push(styles[i].photos[0].url);
     }
   }
 
   const handleClick = (e) => {
-    setCurrImage(varianceArr[e.target.id]);
+    setCurrImage(stylesArr[e.target.id]);
+    selectedStyle = styles[e.target.id].name;
   }
 
   return (
@@ -49,7 +51,7 @@ export default function Item () {
         <div className='flex relative w-[500px] h-[600px]'>
           <div className='grid grid-row-6 space-y-3 overflow-y-scroll no-scrollbar'>
             {
-              varianceArr.map((el,idx)=>{
+              stylesArr.map((el,idx)=>{
                 return(
                   <div className='flex relative w-[100px] h-[100px]'>
                     <div key={idx} className='cursor-pointer' onClick={((e) => {handleClick(e)})}><Image id={idx} src={el} alt="" layout='fill' objectFit='cover'/></div>
@@ -66,7 +68,7 @@ export default function Item () {
           <span className='text-lg font-bold lg:text-3xl'>{item.name}</span>
           <span className='text-sm lg:text-lg'>${item.price}</span>
           <span className='text-sm lg:text-lg'>{item.slogan}</span>
-          <span className='text-sm lg:text-lg'>Style: {currStyle}</span>
+          <span className='text-sm lg:text-lg'>Style: {selectedStyle}</span>
           <Sizes skus={skus}/>
         </div>
       </div>
