@@ -13,10 +13,6 @@ const nextConfig = {
       {
         protocol:"https",
         hostname:"vignette.wikia.nocookie.net",
-      },
-      {
-        protocol:"https",
-        hostname:"localhost"
       }
     ]
   }

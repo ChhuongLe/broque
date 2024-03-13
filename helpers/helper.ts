@@ -110,3 +110,17 @@ export const getStyles = async (id: number) => {
   let styles = await res.json();
   return styles;
 }
+
+export const getRelatedItemIds = async (id: number) => {
+  const res = await(fetch(`http://3.137.191.193/products/${id}/related`))
+  let related = await res.json();
+  return related;
+}
+
+export const fetchRelatedThumbnails = async(arr: Array<number>)  => {
+  const res = Promise.all(
+    arr.map((id)=>{
+      return fetch(`http://3.137.191.193/products/${id}/related`)
+    })
+  );
+}

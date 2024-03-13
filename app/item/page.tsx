@@ -1,11 +1,12 @@
 'use client'
 
-import { getStyles } from '@/helpers/helper'
+import { getRelatedItems, getStyles } from '@/helpers/helper'
 import { useAppStore } from '@/store/store'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Sizes from './Sizes'
+import Related from './Related'
 
 export default function Item () {
   const [item] = useAppStore((state)=> [
@@ -42,7 +43,7 @@ export default function Item () {
 
   const handleClick = (e) => {
     setCurrImage(stylesArr[e.target.id]);
-    selectedStyle = styles[e.target.id].name;
+    setCurrStyle(styles[e.target.id].name);
   }
 
   return (
@@ -68,9 +69,11 @@ export default function Item () {
           <span className='text-lg font-bold lg:text-3xl'>{item.name}</span>
           <span className='text-sm lg:text-lg'>${item.price}</span>
           <span className='text-sm lg:text-lg'>{item.slogan}</span>
-          <span className='text-sm lg:text-lg'>Style: {selectedStyle}</span>
+          <span className='text-sm lg:text-lg'>Style: {currStyle ? currStyle : selectedStyle}</span>
           <Sizes skus={skus}/>
+          <button className='bg-[#99937f] hover:bg-[#cdc6ae]  p-[15px] mt-[10px] rounded font-bold text-white'>Add to Cart</button>
         </div>
+        <Related />
       </div>
     </div>
   )
