@@ -30,12 +30,12 @@ export default function Related () {
   }
 
   return (
-    <div>
+    <div className="flex flex-row">
       {
         relatedImg.map((el)=>{
           return (
-            <div>
-              <Image src={el} alt='' width={60} height={60}/>
+            <div className="relative w-[300px] h-[300px] px-[5px]">
+              <Image src={el} alt='' objectFit="cover" layout="fill"/>
             </div>
           )
         })

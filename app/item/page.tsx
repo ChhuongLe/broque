@@ -73,6 +73,9 @@ export default function Item () {
           <Sizes skus={skus}/>
           <button className='bg-[#99937f] hover:bg-[#cdc6ae]  p-[15px] mt-[10px] rounded font-bold text-white'>Add to Cart</button>
         </div>
+      </div>
+      <div className='flex flex-col max-w-7xl justify-center items-center'>
+        <h2 className='text-2xl font-bold pt-[30px]'>Related Items</h2>
         <Related />
       </div>
     </div>
