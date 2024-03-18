@@ -1,5 +1,6 @@
-import { fetchThumbnails, getRelatedItemIds } from "@/helpers/helper";
+import { fetchRelatedThumbnails, fetchThumbnails, getRelatedItemIds } from "@/helpers/helper";
 import { useAppStore } from "@/store/store";
+import Image from "next/image";
 import { useEffect, useState } from "react"
 
 export default function Related () {
@@ -8,7 +9,7 @@ export default function Related () {
   ]);
 
   const [related, setRelated] = useState([])
-  let temp = []
+  const [relatedImg, setRelatedImg] = useState([])
 
   useEffect(()=> {
     getRelatedItemIds(item.id)
@@ -20,8 +21,25 @@ export default function Related () {
       });
   },[]);
 
-  console.log(temp);
+  if(related.length !== 0) {
+    fetchRelatedThumbnails(related)
+    .then(data => {
+      data.shift()
+      setRelatedImg(data);
+    });
+  }
+
   return (
-    <div>Hello From Related</div>
+    <div>
+      {
+        relatedImg.map((el)=>{
+          return (
+            <div>
+              <Image src={el} alt='' width={60} height={60}/>
+            </div>
+          )
+        })
+      }
+    </div>
   )
 }

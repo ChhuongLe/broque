@@ -118,9 +118,10 @@ export const getRelatedItemIds = async (id: number) => {
 }
 
 export const fetchRelatedThumbnails = async(arr: Array<number>)  => {
-  const res = Promise.all(
+  const res = await Promise.all(
     arr.map((id)=>{
-      return fetch(`http://3.137.191.193/products/${id}/related`)
+       return fetchThumbnails(id);
     })
   );
+  return res;
 }
