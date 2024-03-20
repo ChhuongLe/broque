@@ -1,4 +1,4 @@
-import { fetchRelatedThumbnails, fetchThumbnails, getRelatedItemIds } from "@/helpers/helper";
+import { fetchProduct, fetchRelatedThumbnails, fetchThumbnails, getRelatedItemIds } from "@/helpers/helper";
 import { useAppStore } from "@/store/store";
 import Image from "next/image";
 import { useEffect, useState } from "react"
@@ -10,6 +10,7 @@ export default function Related () {
 
   const [related, setRelated] = useState([])
   const [relatedImg, setRelatedImg] = useState([])
+  const [itemNames, setItemNames] = useState([])
 
   useEffect(()=> {
     getRelatedItemIds(item.id)
@@ -27,7 +28,13 @@ export default function Related () {
       data.shift()
       setRelatedImg(data);
     });
+
+    fetchProduct(1)
+    .then(data => {
+      console.log(data);
+    })
   }
+
 
   return (
     <div className="flex flex-row">

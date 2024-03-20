@@ -1,3 +1,5 @@
+import { getMaxListeners } from "events";
+
 export const fetchAllProducts = async () => {
   const res = await fetch("http://3.137.191.193/products/?count=500")
   let products = await res.json();
@@ -117,10 +119,25 @@ export const getRelatedItemIds = async (id: number) => {
   return related;
 }
 
-export const fetchRelatedThumbnails = async(arr: Array<number>)  => {
+export const fetchRelatedThumbnails = async(arr: Array<number>) => {
   const res = await Promise.all(
     arr.map((id)=>{
        return fetchThumbnails(id);
+    })
+  );
+  return res;
+}
+
+export const fetchProduct = async(id: number) => {
+  const res = await(fetch(`http://3.137.191.193/products/${id}/`))
+  let product = await res.json();
+  return product;
+}
+
+export const fetchSeveralProduct = async(arr: Array<number>) => {
+  const res = await Promise.all(
+    arr.map((id)=>{
+       return fetchProduct(id);
     })
   );
   return res;
