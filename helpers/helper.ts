@@ -134,7 +134,7 @@ export const fetchProduct = async(id: number) => {
   return product;
 }
 
-export const fetchSeveralProduct = async(arr: Array<number>) => {
+export const fetchSeveralProducts = async(arr: Array<number>) => {
   const res = await Promise.all(
     arr.map((id)=>{
        return fetchProduct(id);

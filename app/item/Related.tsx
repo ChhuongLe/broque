@@ -1,40 +1,36 @@
-import { fetchProduct, fetchRelatedThumbnails, fetchThumbnails, getRelatedItemIds } from "@/helpers/helper";
+import { fetchRelatedThumbnails, fetchSeveralProducts } from "@/helpers/helper";
 import { useAppStore } from "@/store/store";
 import Image from "next/image";
 import { useEffect, useState } from "react"
 
-export default function Related () {
+export default function Related ({ relatedIds }) {
   const [item] = useAppStore((state)=> [
     state.item,
   ]);
 
-  const [related, setRelated] = useState([])
+  console.log("Related Ids: ", relatedIds)
+
+  const [related, setRelated] = useState(relatedIds)
   const [relatedImg, setRelatedImg] = useState([])
   const [itemNames, setItemNames] = useState([])
 
   useEffect(()=> {
-    getRelatedItemIds(item.id)
+    fetchRelatedThumbnails(related)
       .then(data => {
-        setRelated(data);
+          data.shift();
+          setRelatedImg(data);
       })
       .catch(error=> {
         console.log(error)
       });
-  },[]);
 
-  if(related.length !== 0) {
-    fetchRelatedThumbnails(related)
-    .then(data => {
-      data.shift()
-      setRelatedImg(data);
-    });
-
-    fetchProduct(1)
+    fetchSeveralProducts(related)
     .then(data => {
       console.log(data);
-    })
-  }
-
+      data.shift();
+      setItemNames(data);
+    });
+  },[]);
 
   return (
     <div className="flex flex-row">

@@ -1,6 +1,6 @@
 'use client'
 
-import { getRelatedItems, getStyles } from '@/helpers/helper'
+import { getRelatedItemIds, getStyles } from '@/helpers/helper'
 import { useAppStore } from '@/store/store'
 import Image from 'next/image'
 import { useEffect } from 'react'
@@ -16,6 +16,7 @@ export default function Item () {
   const [styles, setStyles] = useState([]);
   const [currImage, setCurrImage] = useState(item.img);
   const [currStyle, setCurrStyle] = useState("");
+  const [relatedIds, setRelatedIds] = useState([]);
 
   let stylesArr:any = [];
   let selectedStyle = "";
@@ -28,7 +29,15 @@ export default function Item () {
       .catch(error => {
         console.log(error)
       });
-  }, [])
+
+      getRelatedItemIds(item.id)
+      .then(data => {
+        setRelatedIds(data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   let skus:any = {};
 
@@ -70,13 +79,13 @@ export default function Item () {
           <span className='text-sm lg:text-lg'>${item.price}</span>
           <span className='text-sm lg:text-lg'>{item.slogan}</span>
           <span className='text-sm lg:text-lg'>Style: {currStyle ? currStyle : selectedStyle}</span>
-          <Sizes skus={skus}/>
+          <Sizes skus={skus} />
           <button className='bg-[#99937f] hover:bg-[#cdc6ae]  p-[15px] mt-[10px] rounded font-bold text-white'>Add to Cart</button>
         </div>
       </div>
       <div className='flex flex-col max-w-7xl justify-center items-center'>
         <h2 className='text-2xl font-bold pt-[30px]'>Related Items</h2>
-        <Related />
+        <Related relatedIds={relatedIds} />
       </div>
     </div>
   )
