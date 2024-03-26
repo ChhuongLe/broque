@@ -59,7 +59,7 @@ export default function Item () {
     <div className='flex flex-col justify-center items-center py-[50px] w-screen'>
       <div className='flex flex-row max-w-7xl'>
         <div className='flex relative w-[500px] h-[600px]'>
-          <div className='grid grid-row-6 space-y-3 overflow-y-scroll no-scrollbar'>
+          <div className='grid grid-row-6 space-y-3 px-[10px] overflow-y-scroll no-scrollbar'>
             {
               stylesArr.map((el,idx)=>{
                 return(
@@ -74,7 +74,7 @@ export default function Item () {
             <Image src={currImage} alt="" objectFit='cover' layout='fill'/>
           </div>
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col px-[20px]'>
           <span className='text-lg font-bold lg:text-3xl'>{item.name}</span>
           <span className='text-sm lg:text-lg'>${item.price}</span>
           <span className='text-sm lg:text-lg'>{item.slogan}</span>

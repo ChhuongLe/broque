@@ -26,21 +26,18 @@ export default function Related ({ relatedIds }) {
     });
   },[]);
 
-  console.log("reloaded")
-
   return (
     <div className="flex flex-row space-x-2 lg:space-x-10">
       {
         relatedImg.map((el, index)=>{
           console.log(index)
           return (
-            <div className='flex flex-col relatative w-[304px] h-[400px] border-2 border-black'>
+            <div className='flex flex-col relatative w-[302px] h-[400px] border border-black'>
               <div className="relative w-[300px] h-[300px]">
                 <Image src={el} alt='' objectFit="cover" layout="fill"/>
               </div>
-              <span>{itemNames[index] ? itemNames[index].name : "Generic Title"}</span>
-              <span>Rating: </span>
-              <span>Price: {itemNames[index] ? itemNames[index].price : "N/A"}</span>
+              <span>{itemNames[index] ? itemNames[index].name : "N/A"}</span>
+              <span>Price: {itemNames[index] ? itemNames[index].default_price : "N/A"}</span>
             </div>
           )
         })
