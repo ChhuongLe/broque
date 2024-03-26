@@ -56,8 +56,8 @@ export default function Item () {
   }
 
   return (
-    <div className='py-[50px] w-screen'>
-      <div className='flex flex-row justify-around max-w-7xl mr-auto'>
+    <div className='flex flex-col justify-center items-center py-[50px] w-screen'>
+      <div className='flex flex-row max-w-7xl'>
         <div className='flex relative w-[500px] h-[600px]'>
           <div className='grid grid-row-6 space-y-3 overflow-y-scroll no-scrollbar'>
             {
@@ -85,7 +85,7 @@ export default function Item () {
       </div>
       <div className='flex flex-col max-w-7xl justify-center items-center'>
         <h2 className='text-2xl font-bold pt-[30px]'>Related Items</h2>
-        <Related relatedIds={relatedIds} />
+          <Related relatedIds={relatedIds} />
       </div>
     </div>
   )

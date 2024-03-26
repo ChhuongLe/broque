@@ -140,5 +140,5 @@ export const fetchSeveralProducts = async(arr: Array<number>) => {
        return fetchProduct(id);
     })
   );
-  return res;
+  return res; 
 }

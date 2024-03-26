@@ -8,8 +8,6 @@ export default function Related ({ relatedIds }) {
     state.item,
   ]);
 
-  console.log("Related Ids: ", relatedIds)
-
   const [related, setRelated] = useState(relatedIds)
   const [relatedImg, setRelatedImg] = useState([])
   const [itemNames, setItemNames] = useState([])
@@ -19,26 +17,30 @@ export default function Related ({ relatedIds }) {
       .then(data => {
           data.shift();
           setRelatedImg(data);
-      })
-      .catch(error=> {
-        console.log(error)
       });
 
     fetchSeveralProducts(related)
     .then(data => {
-      console.log(data);
       data.shift();
       setItemNames(data);
     });
   },[]);
 
+  console.log("reloaded")
+
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row space-x-2 lg:space-x-10">
       {
-        relatedImg.map((el)=>{
+        relatedImg.map((el, index)=>{
+          console.log(index)
           return (
-            <div className="relative w-[300px] h-[300px] px-[5px]">
-              <Image src={el} alt='' objectFit="cover" layout="fill"/>
+            <div className='flex flex-col relatative w-[304px] h-[400px] border-2 border-black'>
+              <div className="relative w-[300px] h-[300px]">
+                <Image src={el} alt='' objectFit="cover" layout="fill"/>
+              </div>
+              <span>{itemNames[index] ? itemNames[index].name : "Generic Title"}</span>
+              <span>Rating: </span>
+              <span>Price: {itemNames[index] ? itemNames[index].price : "N/A"}</span>
             </div>
           )
         })
